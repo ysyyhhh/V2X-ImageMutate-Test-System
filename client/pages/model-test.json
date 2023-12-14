@@ -1,0 +1,77 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "header":"任务列表",
+      "type": "crud",
+      "id": "test_task_list",
+      "draggable": true,
+      "interval": 5000,
+      "api": "${API_V2V}/model_test/get_test_task_list/?userid=3",
+      "columns": [
+        {
+          "name": "task_id",
+          "label": "ID"
+        },
+        {
+          "label": "任务名",
+          "name": "task_name",
+          "type": "text",
+          "id": "u:e21dbcfde2e0"
+        },
+        {
+          "type": "text",
+          "label": "建立时间",
+          "name": "create_time",
+          "id": "u:8e3efa9c35ad"
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "name": "c",
+          "id": "u:36e1ae40d0e8",
+          "buttons": [
+            {
+              "type": "button",
+              "label": "执行任务",
+              "actionType": "ajax",
+              "api": "POST:${API_V2V}/model_test/execute_test_task/?task_id=${task_id}"
+            }
+          ]
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "name": "l",
+          "id": "u:b269163f9087",
+          "buttons": [
+            {
+              "label": "删除",
+              "type": "button",
+              "actionType": "ajax",
+              "level": "danger",
+              "confirmText": "确认要删除？",
+              "api": "POST:${API_V2V}/model_test/delete_a_test_task/?task_id=${task_id}"
+            }
+          ]
+        },
+        {
+          "type": "mapping",
+          "label": "状态",
+          "name": "task_state",
+          "map": {
+            "ready": "<span class='label label-info'>就绪</span>",
+            "finish": "<span class='label label-success'>已完成</span>",
+            "running": "<span class='label label-warning'>执行中</span>"
+          },
+          "id": "u:805eebd0c1f5"
+        },
+        {
+          "type": "text",
+          "label": "扩增任务id",
+          "name": "aug_id"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "pages": [
+      {
+        "label": "Home",
+        "url": "/",
+        "redirect": "/file"
+      },
+      {
+        "label": "功能列表",
+        "children": [
+          {
+            "label": "图像文件管理",
+            "url": "file",
+            "icon": "fa fa-cube",
+            "schemaApi": "get:/pages/file-manage.json"
+          },
+          {
+            "label": "变异算子配置",
+            "url": "operator",
+            "icon": "fa fa-sliders-h",
+            "schemaApi": "get:/pages/operator-configuration.json"
+          },
+          {
+            "label": "变异任务管理",
+            "url": "variation",
+            "icon": "fa fa-cube",
+            "schemaApi": "get:/pages/data-variation.json"
+          },
+          {
+            "label": "测试任务管理",
+            "url": "test",
+            "icon": "fa fa-cube",
+            "schemaApi": "get:/pages/model-test.json"
+          },
+          {
+            "label": "模型测试报告",
+            "url": "report",
+            "icon": "fa fa-file-alt",
+            "schemaApi": "get:/pages/test-report.json"
+          }
+        ]
+      }
+    ]
+  }
+}

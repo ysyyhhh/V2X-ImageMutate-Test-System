@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  server:
+    build: ./server
+    ports:
+      - 8000
+    volumes:
+      - ./server/db.sqlite3:/app/db.sqlite3
+      - ./server/static:/app/static
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: "nvidia"
+              count: "all"
+              capabilities: [ "gpu" ]
+    networks:
+      - image-mutate-network
+  frontend:
+    build: ./client
+    ports:
+      - 3001:3001
+    environment:
+      - SERVER_URL=http://server:8000
+      - CLIENT_PORT=3001
+    depends_on:
+      - server
+    networks:
+      - image-mutate-network
+networks:
+  image-mutate-network:
+    driver: bridge #

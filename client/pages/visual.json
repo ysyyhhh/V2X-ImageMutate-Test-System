@@ -1,0 +1,151 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "type": "panel",
+      "id": "u:60c188f9db32",
+      "body": [
+        {
+          "type": "select",
+          "label": "场景选择",
+          "name": "road_select",
+          "options": [
+            {
+              "label": "双车场景一",
+              "value": 0
+            },
+            {
+              "label": "双车场景二",
+              "value": 1
+            },
+            {
+              "label": "三车场景一",
+              "value": 2
+            },
+            {
+              "label": "三车场景二",
+              "value": 3
+            }
+          ],
+          "multiple": false,
+          "value": 0
+        },
+        {
+          "type": "select",
+          "label": "数据集选择",
+          "name": "set_select1",
+          "source": "post:${API_V2V}/visual/getset?road=$road_select&type=1",
+          "multiple": false,
+          "value": 0
+        },
+        {
+          "type": "select",
+          "label": "数据集选择",
+          "name": "set_select2",
+          "source": "post:${API_V2V}/visual/getset?road=$road_select&type=2",
+          "multiple": false,
+          "value": 0
+        }
+      ],
+      "title": "点云可视化",
+      "affixFooter": false,
+      "actions": [
+        {
+          "type": "page",
+          "body": {
+            "type": "button",
+            "label": "可视化",
+            "actionType": "ajax",
+            "api": "POST:${API_V2V}/visual/visual?road=${road_select}&set1=$set_select1&set2=$set_select2",
+            "tooltip": "点击我后会发送一个请求，请求回来后，弹出一个框。",
+            "feedback": {
+              "title": "可视化展示",
+              "body": [
+                {
+                  "type": "page",
+                  "body": {
+                    "type": "page",
+                    "name": "errimg",
+                    "body": {
+                      "type": "service",
+                      "id": "errimg",
+                      "api": "post:${API_V2V}/visual/getimage?road=${road_select}&set1=$set_select1&set2=$set_select2",
+                      "body": {
+                        "type": "images",
+                        "name": "imageList",
+                        "auto": false,
+                        "animation": "slide",
+                        "height": 400,
+                        "enlargeAble": true,
+                        "thumbMode": "w-full",
+                        "showToolbar": true
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "type": "flex",
+      "id": "u:b9a860a52e14",
+      "className": "p-1",
+      "items": [
+      ],
+      "style": {
+        "position": "static"
+      },
+      "direction": "row",
+      "justify": "flex-start",
+      "alignItems": "stretch"
+    },
+    {
+      "type": "flex",
+      "className": "p-1",
+      "items": [
+      ],
+      "id": "u:0a0890900035",
+      "direction": "column",
+      "justify": "center",
+      "alignItems": "stretch"
+    }
+  ],
+  "style": {
+    "fontFamily": "Times New Roman",
+    "fontSize": 12,
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "regions": [
+    "body",
+    "header"
+  ],
+  "aside": [
+    {
+      "type": "nav",
+      "stacked": true,
+      "links": [
+        {
+          "label": "添加扩增任务",
+          "to": "?id=1"
+        },
+        {
+          "label": "扩增任务列表",
+          "to": "?id=2"
+        }
+      ],
+      "id": "u:b2971b734fd7",
+      "className": "b-dark"
+    }
+  ],
+  "title": "点云可视化",
+  "toolbar": [
+  ],
+  "pullRefresh": {
+    "disabled": true
+  },
+  "asideResizor": false
+}

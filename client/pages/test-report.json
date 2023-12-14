@@ -1,0 +1,418 @@
+{
+  "type": "collapse",
+  "body": [
+    {
+      "type": "select",
+      "label": "测试报告",
+      "name": "select",
+      "source": "get:${API_V2V}/result_manage/get_all_test_result/?user_id=3",
+      "id": "u:825e45f8ec45",
+      "onEvent": {
+        "change": {
+          "actions": [
+            {
+              "actionType": "reload",
+              "componentId": "errimg"
+            },
+            {
+              "actionType": "reload",
+              "componentId": "table1"
+            },
+            {
+              "actionType": "reload",
+              "componentId": "chart"
+            },
+            {
+              "actionType": "reload",
+              "componentId": "table2"
+            }
+          ]
+        }
+      },
+      "multiple": false
+    },
+    {
+      "type": "collapse",
+      "id": "u:75e85791e93b",
+      "body": [
+        {
+          "type": "page",
+          "body": {
+            "type": "page",
+            "name": "errimg",
+            "body": {
+              "type": "service",
+              "id": "errimg",
+              "api": "get:${API_V2V}/result_manage/get_test_visual_result/?task_id=$select",
+              "body": {
+                "type": "images",
+                "name": "imageList",
+                "auto": false,
+                "thumbMode": "cover",
+                "animation": "slide",
+                "height": 400,
+                "enlargeAble": true,
+                "showToolbar": true
+              }
+            }
+          }
+        }
+      ],
+      "header": "可视化展示"
+    },
+    {
+      "type": "collapse",
+      "id": "u:75e85791e93b",
+      "header": "图表展示",
+      "body": [
+        {
+          "type": "flex",
+          "className": "p-1",
+          "items": [
+            {
+              "type": "container",
+              "body": [
+                {
+                  "type": "markdown",
+                  "value": "## 评估指标",
+                  "id": "u:e573e7e3c3c4"
+                },
+                {
+                  "type": "service",
+                  "id": "table1",
+                  "api": "get:${API_V2V}/result_manage/get_test_num_result/?task_id=$select",
+                  "body": [
+                    {
+                      "type": "table",
+                      "source": "$rows",
+                      "columns": [
+                        {
+                          "label": "数据类型",
+                          "name": "type",
+                          "type": "text",
+                          "id": "u:a4b857195548"
+                        },
+                        {
+                          "label": "中心车辆ID",
+                          "name": "ego_id",
+                          "type": "text",
+                          "id": "u:a4b857195548"
+                        },
+                        {
+                          "label": "扩增车辆ID",
+                          "name": "car_id",
+                          "type": "text",
+                          "id": "u:a4b857195548"
+                        },
+                        {
+                          "type": "text",
+                          "label": "Road IoU",
+                          "name": "road_iou",
+                          "id": "u:2c139b97b4be"
+                        },
+                        {
+                          "type": "text",
+                          "label": "Lane IoU",
+                          "name": "lane_iou",
+                          "id": "u:b07b7c34e6d1"
+                        },
+                        {
+                          "type": "text",
+                          "label": "Dynamic IoU",
+                          "name": "dynamic_iou",
+                          "id": "u:6bc9ef1b51f4"
+                        }
+                      ],
+                      "id": "u:3d7573274ad2"
+                    }
+                  ]
+                }
+              ],
+              "id": "u:f3ef4741dbd0",
+              "size": "xs",
+              "style": {
+                "position": "static",
+                "display": "block",
+                "flex": "1 1 auto",
+                "flexGrow": 1,
+                "flexBasis": "auto",
+                "marginTop": "0",
+                "paddingTop": "0"
+              },
+              "wrapperBody": false,
+              "isFixedHeight": false,
+              "isFixedWidth": false
+            }
+          ],
+          "style": {
+            "position": "static"
+          },
+          "direction": "row",
+          "justify": "flex-start",
+          "alignItems": "stretch",
+          "id": "u:3792fa3b4a07"
+        },
+        {
+          "type": "service",
+          "id": "chart",
+          "body": [
+            {
+              "type": "chart",
+              "api": "get:${API_V2V}/result_manage/get_test_chart_result/?task_id=$select",
+              "height": 600,
+              "config": {
+                "legend": {
+                  "data": "${data_list || []}"
+                },
+                "textStyle": {
+                  "fontFamily": "Microsoft YaHei"
+                },
+                "polar": {},
+                "angleAxis": {
+                  "type": "category",
+                  "data": [
+                    "Road IoU",
+                    "Lane IoU",
+                    "Dynamic IoU"
+                  ]
+                },
+                "radiusAxis": {},
+                "tooltip": {},
+                "series": [
+                  {
+                    "data": "${raw || []}",
+                    "type": "line",
+                    "name": "raw",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(0, 0, 255, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "blue"
+                    }
+                  },
+                  {
+                    "data": "${aug1 || []}",
+                    "type": "line",
+                    "name": "aug1",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(255, 255, 0, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "yellow"
+                    }
+                  },
+                  {
+                    "data": "${aug2 || []}",
+                    "type": "line",
+                    "name": "aug2",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(128, 0, 128, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "purple"
+                    }
+                  },
+                  {
+                    "data": "${aug3 || []}",
+                    "type": "line",
+                    "name": "aug3",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(128, 128, 128, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "gray"
+                    }
+                  },
+                  {
+                    "data": "${aug4 || []}",
+                    "type": "line",
+                    "name": "aug4",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(255, 165, 0, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "orange"
+                    }
+                  },
+                  {
+                    "data": "${aug5 || []}",
+                    "type": "line",
+                    "name": "aug5",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(0, 255, 255, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "cyan"
+                    }
+                  },
+                  {
+                    "data": "${aug_all || []}",
+                    "type": "line",
+                    "name": "aug_all",
+                    "coordinateSystem": "polar",
+                    "areaStyle": {
+                      "color": "rgba(0, 255, 0, 0.5)"
+                    },
+                    "lineStyle": {
+                      "color": "green"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "size": "xs",
+          "style": {
+            "position": "static",
+            "display": "block",
+            "flex": "1 1 auto",
+            "flexGrow": 1,
+            "flexBasis": "auto"
+          },
+          "wrapperBody": false,
+          "isFixedHeight": false,
+          "isFixedWidth": false
+        }
+      ]
+    },
+    {
+      "type": "collapse",
+      "id": "u:75e85791e93b",
+      "header": "用例选择",
+      "body": [
+        {
+          "type": "page",
+          "body": [
+            {
+              "type": "form",
+              "target": "my_crud",
+              "title": "参数筛选",
+              "columnCount": 4,
+              "submitButtonText": "查询",
+              "body": [
+                {
+                  "type": "select",
+                  "label": "测试任务",
+                  "name": "select",
+                  "source": "get:${API_V2V}/result_manage/get_all_test_result/?user_id=3",
+                  "id": "u:825e45f8ec45",
+                  "multiple": false
+                },
+                {
+                  "type": "input-text",
+                  "label": "Road IoU下降值",
+                  "name": "param1",
+                  "labelAlign": "right",
+                  "id": "u:1a2b3c4d5e6g"
+                },
+                {
+                  "type": "input-text",
+                  "label": "Lane IoU下降值",
+                  "name": "param2",
+                  "labelAlign": "right",
+                  "id": "u:1a2b3c4d5e6h"
+                },
+                {
+                  "type": "input-text",
+                  "label": "Dynamic IoU下降值",
+                  "name": "param3",
+                  "labelAlign": "right",
+                  "id": "u:1a2b3c4d5e6i"
+                }
+              ],
+              "actions": [
+                {
+                  "type": "submit",
+                  "label": "查询"
+                }
+              ]
+            },
+            {
+              "type": "markdown",
+              "value": "## IoU下降超阈值数据列表",
+              "id": "u:e573e7e3c3c4"
+            },
+            {
+              "type": "crud",
+              "name": "my_crud",
+              "api": "get:${API_V2V}/result_manage/get_influence_strong_frames/?task_id=$select&param1=$param1&param2=$param2&param3=$param3",
+              "columns": [
+                {
+                  "name": "id",
+                  "label": "ID"
+                },
+                {
+                  "label": "文件名",
+                  "name": "file_name",
+                  "type": "text",
+                  "id": "u:e21dbcfde2e0"
+                },
+                {
+                  "label": "扩增车辆ID",
+                  "name": "car_id",
+                  "type": "text",
+                  "id": "u:e21dbcfde2e0"
+                },
+                {
+                  "label": "Road IoU下降值",
+                  "name": "road_iou_down",
+                  "type": "text",
+                  "id": "u:e21dbcfde2e0"
+                },
+                {
+                  "type": "text",
+                  "label": "Lane IoU下降值",
+                  "name": "lane_iou_down",
+                  "id": "u:36e1ae40d0e8"
+                },
+                {
+                  "type": "text",
+                  "label": "Dynamic IoU下降值",
+                  "name": "dynamic_iou_down",
+                  "id": "u:8e3efa9c35ad"
+                }
+              ]
+            }
+          ],
+          "size": "xs",
+          "style": {
+            "position": "static",
+            "display": "block",
+            "flex": "1 1 auto",
+            "flexGrow": 1,
+            "flexBasis": "auto"
+          },
+          "wrapperBody": false,
+          "isFixedHeight": false,
+          "isFixedWidth": false
+        }
+      ]
+    },
+    {
+      "type": "flex",
+      "className": "p-1",
+      "items": [],
+      "style": {
+        "position": "relative"
+      }
+    }
+  ],
+  "hidden": false,
+  "header": "测试结果查看",
+  "collapsable": true,
+  "headerPosition": "top",
+  "disabled": false,
+  "asideResizor": false,
+  "style": {
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "pullRefresh": {
+    "disabled": true
+  }
+}

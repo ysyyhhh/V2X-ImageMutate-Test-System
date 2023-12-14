@@ -1,0 +1,183 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "type": "panel",
+      "title": "已上传文件",
+      "body": [
+        {
+          "type": "crud",
+          "title": "",
+          "draggable": true,
+          "id": "u:60c188f9db32",
+          "interval": 5000,
+          "api": "GET:${API_V2V}/file_up_down/getAllFile/?userid=3",
+          "syncLocation": false,
+          "columns": [
+            {
+              "name": "file_id",
+              "label": "ID"
+            },
+            {
+              "label": "文件名",
+              "name": "file_name",
+              "type": "text",
+              "id": "u:e21dbcfde2e0"
+            },
+            {
+              "type": "text",
+              "label": "上传时间",
+              "name": "upload_time",
+              "id": "u:8e3efa9c35ad"
+            },
+            {
+              "type": "mapping",
+              "label": "类型",
+              "name": "file_type",
+              "id": "u:36e1ae40d0e8",
+              "map": {
+                "2": "两车协同",
+                "3": "三车协同",
+                "4": "四车协同",
+                "5": "五车协同"
+              }
+            },
+            {
+              "type": "text",
+              "label": "描述",
+              "name": "file_desc",
+              "id": "u:b269163f9087"
+            },
+            {
+              "type": "mapping",
+              "label": "状态",
+              "name": "file_state",
+              "id": "u:b269163f9099",
+              "map": {
+                "raw": "<span class='label label-info'>未扩增</span>",
+                "augmented": "<span class='label label-success'>已扩增</span>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "panel",
+      "id": "u:60c188f9db32",
+      "title": "上传图像文件",
+      "affixFooter": false,
+      "actions": [],
+      "hidden": false,
+      "body": [
+        {
+          "type": "form",
+          "title": "选择文件",
+          "api": "${API_V2V}/file_up_down/upload/?user_id=3&file_type=$file_type&file_desc=$file_desc",
+          "body": [
+            {
+              "type": "select",
+              "label": "场景选择",
+              "name": "select",
+              "options": [
+                {
+                  "label": "双车场景(2021_08_18_19_48_05)",
+                  "value": "A"
+                },
+                {
+                  "label": "三车场景(2021_08_20_21_10_24)",
+                  "value": "B"
+                },
+                {
+                  "label": "四车场景(2021_08_24_07_45_41)",
+                  "value": "C"
+                },
+                {
+                  "label": "五车场景(2021_08_22_07_52_02)",
+                  "value": "D"
+                }
+              ],
+              "id": "u:d47edfe19c2b",
+              "multiple": false,
+              "value": ""
+            },
+            {
+              "type": "input-text",
+              "name": "file_type",
+              "label": "协同车数",
+              "placeholder": "请输入上传数据集中参与协同感知的车辆数目"
+            },
+            {
+              "type": "input-text",
+              "name": "file_desc",
+              "label": "文件描述",
+              "placeholder": "请输入对上传文件的描述"
+            },
+            {
+              "type": "input-file",
+              "name": "file",
+              "label": "",
+              "accept": "*",
+              "asBlob": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flex",
+      "className": "p-1",
+      "items": [],
+      "style": {
+        "position": "static"
+      },
+      "direction": "row",
+      "justify": "flex-start",
+      "alignItems": "stretch",
+      "id": "u:b9a860a52e14"
+    },
+    {
+      "type": "flex",
+      "className": "p-1",
+      "items": [],
+      "direction": "column",
+      "justify": "center",
+      "alignItems": "stretch",
+      "id": "u:0a0890900035"
+    }
+  ],
+  "id": "u:98b906f4cfe3",
+  "style": {
+    "fontFamily": "Times New Roman",
+    "fontSize": 12,
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "regions": [
+    "body",
+    "header"
+  ],
+  "aside": [
+    {
+      "type": "nav",
+      "stacked": true,
+      "links": [
+        {
+          "label": "添加扩增任务",
+          "to": "?id=1"
+        },
+        {
+          "label": "扩增任务列表",
+          "to": "?id=2"
+        }
+      ],
+      "id": "u:b2971b734fd7",
+      "className": "b-dark"
+    }
+  ],
+  "title": "",
+  "toolbar": [],
+  "pullRefresh": {
+    "disabled": true
+  },
+  "asideResizor": false
+}

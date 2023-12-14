@@ -1,0 +1,512 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "type": "form",
+      "api": "${API_V2V}/aug_config/add_aug_task/",
+      "body": [
+        {
+          "type": "panel",
+          "id": "u:b1664ae9e5a4",
+          "title": "变异算子配置",
+          "affixFooter": false,
+          "actions": [],
+          "hidden": false,
+          "body": [
+            {
+              "type": "tabs",
+              "tabsMode": "vertical",
+              "tabs": [
+                {
+                  "title": "默认配置",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "算子选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "func_select",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "阴影变异",
+                                  "value": 0
+                                },
+                                {
+                                  "label": "运动模糊变异",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "高温变异",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "雾天变异",
+                                  "value": 3
+                                },
+                                {
+                                  "label": "降雨变异",
+                                  "value": 4
+                                },
+                                {
+                                  "label": "降雪变异",
+                                  "value": 5
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "自定义配置",
+                  "id": "u:f97333f5ccae",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "算子选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "func_select",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "阴影变异",
+                                  "value": 6
+                                },
+                                {
+                                  "label": "运动模糊变异",
+                                  "value": 7
+                                },
+                                {
+                                  "label": "高温变异",
+                                  "value": 8
+                                },
+                                {
+                                  "label": "雾天变异",
+                                  "value": 9
+                                },
+                                {
+                                  "label": "降雨变异",
+                                  "value": 10
+                                },
+                                {
+                                  "label": "降雪变异",
+                                  "value": 11
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        },
+                        {
+                          "title": "参数配置",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "intensity",
+                              "label": "变异强度",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "弱",
+                                  "value": 0
+                                },
+                                {
+                                  "label": "中",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "强",
+                                  "value": 2
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "toolbar": []
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "title": "图像文件配置",
+          "body": [
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "title": "两车协同",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "文件选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "fileid",
+                              "label": "",
+                              "clearable": true,
+                              "source": "${API_V2V}/file_up_down/get_type_file_list/?userid=3&filetype=2",
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "中心车辆选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "ego_car_id",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "1号车辆",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "2号车辆",
+                                  "value": 2
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "是否对单车分别扩增",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "separate_flag",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "是",
+                                  "value": true
+                                },
+                                {
+                                  "label": "否",
+                                  "value": false
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "三车协同",
+                  "id": "u:b352eafb0951",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "文件选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "fileid",
+                              "label": "",
+                              "multiple": false,
+                              "clearable": true,
+                              "source": "${API_V2V}/file_up_down/get_type_file_list/?userid=3&filetype=3"
+                            }
+                          ],
+                          "id": "u:b23f5d30ab6e"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "中心车辆选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "ego_car_id",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "1号车辆",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "2号车辆",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "3号车辆",
+                                  "value": 3
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "是否对单车分别扩增",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "separate_flag",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "是",
+                                  "value": true
+                                },
+                                {
+                                  "label": "否",
+                                  "value": false
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "四车协同",
+                  "id": "u:b352eafb0951",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "文件选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "fileid",
+                              "label": "",
+                              "multiple": false,
+                              "clearable": true,
+                              "source": "${API_V2V}/file_up_down/get_type_file_list/?userid=3&filetype=4"
+                            }
+                          ],
+                          "id": "u:b23f5d30ab6e"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "中心车辆选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "ego_car_id",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "1号车辆",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "2号车辆",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "3号车辆",
+                                  "value": 3
+                                },
+                                {
+                                  "label": "4号车辆",
+                                  "value": 4
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "是否对单车分别扩增",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "separate_flag",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "是",
+                                  "value": true
+                                },
+                                {
+                                  "label": "否",
+                                  "value": false
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "五车协同",
+                  "id": "u:b352eafb0951",
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "文件选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "fileid",
+                              "label": "",
+                              "multiple": false,
+                              "clearable": true,
+                              "source": "${API_V2V}/file_up_down/get_type_file_list/?userid=3&filetype=5"
+                            }
+                          ],
+                          "id": "u:b23f5d30ab6e"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "中心车辆选择",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "ego_car_id",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "1号车辆",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "2号车辆",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "3号车辆",
+                                  "value": 3
+                                },
+                                {
+                                  "label": "4号车辆",
+                                  "value": 4
+                                },
+                                {
+                                  "label": "5号车辆",
+                                  "value": 5
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "是否对单车分别扩增",
+                          "body": [
+                            {
+                              "type": "list-select",
+                              "name": "separate_flag",
+                              "label": "",
+                              "clearable": true,
+                              "options": [
+                                {
+                                  "label": "是",
+                                  "value": true
+                                },
+                                {
+                                  "label": "否",
+                                  "value": false
+                                }
+                              ],
+                              "multiple": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "toolbar": []
+            }
+          ],
+          "affixFooter": false,
+          "actions": [],
+          "hidden": false
+        },
+        {
+          "type": "input-text",
+          "name": "taskname",
+          "label": "扩增任务名称",
+          "placeholder": "请输入该扩增任务的名称"
+        }
+      ],
+      "id": "u:24f2c6360ef0",
+      "title": "添加扩增任务"
+    }
+  ]
+}

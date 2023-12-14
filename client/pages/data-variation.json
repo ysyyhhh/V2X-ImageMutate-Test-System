@@ -1,0 +1,207 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "header": "变异任务列表",
+      "type": "crud",
+      "draggable": true,
+      "id": "form_data",
+      "interval": 5000,
+      "api": "${API_V2V}/aug_config/get_all_aug_task/?userid=3",
+      "columns": [
+        {
+          "name": "task_id",
+          "label": "ID"
+        },
+        {
+          "label": "任务名",
+          "name": "task_name",
+          "type": "text",
+          "id": "u:e21dbcfde2e0"
+        },
+        {
+          "type": "text",
+          "label": "建立时间",
+          "name": "create_time",
+          "id": "u:8e3efa9c35ad"
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "name": "c",
+          "id": "u:36e1ae40d0e8",
+          "buttons": [
+            {
+              "type": "button",
+              "label": "执行任务",
+              "actionType": "ajax",
+              "api": "POST:${API_V2V}/data_aug/execute_aug_task/?task_id=${task_id}",
+              "id": "u:40815186a10e"
+            }
+          ]
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "name": "d",
+          "id": "u:b269163f9087",
+          "buttons": [
+            {
+              "label": "删除",
+              "type": "button",
+              "actionType": "ajax",
+              "level": "danger",
+              "confirmText": "确认要删除？",
+              "api": "POST:${API_V2V}/data_aug/delete_a_aug_task/?task_id=${task_id}"
+            }
+          ]
+        },
+        {
+          "type": "mapping",
+          "label": "状态",
+          "name": "task_state",
+          "id": "u:b269163f9099",
+          "map": {
+            "ready": "<span class='label label-info'>就绪</span>",
+            "finish": "<span class='label label-success'>已完成</span>",
+            "running": "<span class='label label-warning'>执行中</span>"
+          }
+        },
+        {
+          "type": "button",
+          "label": "任务详情",
+          "actionType": "dialog",
+          "dialog": {
+            "title": "详情查看",
+            "body": [
+              {
+                "type": "crud",
+                "api": "GET:${API_V2V}/data_aug/get_a_aug_task_info/?task_id=${task_id}",
+                "columns": [
+                  {
+                    "label": "变异算子",
+                    "name": "aug_type",
+                    "type": "text",
+                    "id": "u:e865d111df73"
+                  },
+                  {
+                    "type": "text",
+                    "label": "变异强度",
+                    "name": "aug_para",
+                    "id": "u:72ab94f5e491"
+                  },
+                  {
+                    "type": "text",
+                    "label": "中心车辆ID",
+                    "name": "ego_car_id",
+                    "id": "u:27289f9151e7"
+                  },
+                  {
+                    "type": "text",
+                    "label": "分车变异",
+                    "name": "separate_flag",
+                    "id": "u:30766e53b930"
+                  }
+                ],
+                "id": "u:e7157c5afc3c"
+              }
+            ]
+          },
+          "id": "u:c0794305b3b6"
+        }
+      ]
+    },
+    {
+      "type": "collapse",
+      "header": "变异结果查看",
+      "body": [
+        {
+          "type": "select",
+          "label": "",
+          "name": "select",
+          "source": "get:${API_V2V}/data_aug/get_all_aug_task/?user_id=3",
+          "id": "u:825e45f8ec45",
+          "onEvent": {
+            "change": {
+              "actions": [
+                {
+                  "actionType": "reload",
+                  "componentId": "errimg1"
+                },
+                {
+                  "actionType": "reload",
+                  "componentId": "errimg2"
+                }
+              ]
+            }
+          },
+          "multiple": false
+        },
+        {
+          "type": "collapse",
+          "id": "u:75e85791e93b",
+          "body": [
+            {
+              "type": "page",
+              "body": {
+                "type": "page",
+                "name": "errimg1",
+                "body": {
+                  "type": "service",
+                  "id": "errimg1",
+                  "api": "get:${API_V2V}/data_aug/get_raw_visual_result/?task_id=$select",
+                  "body": {
+                    "type": "images",
+                    "name": "imageList",
+                    "auto": false,
+                    "thumbMode": "cover",
+                    "animation": "slide",
+                    "height": 400,
+                    "enlargeAble": true,
+                    "showToolbar": true
+                  }
+                }
+              }
+            }
+          ],
+          "header": "变异前图像数据集"
+        },
+        {
+          "type": "collapse",
+          "id": "u:75e85791e93b",
+          "body": [
+            {
+              "type": "page",
+              "body": {
+                "type": "page",
+                "name": "errimg2",
+                "body": {
+                  "type": "service",
+                  "id": "errimg2",
+                  "api": "get:${API_V2V}/data_aug/get_aug_visual_result/?task_id=$select",
+                  "body": {
+                    "type": "images",
+                    "name": "imageList",
+                    "auto": false,
+                    "thumbMode": "cover",
+                    "animation": "slide",
+                    "height": 400,
+                    "enlargeAble": true,
+                    "showToolbar": true
+                  }
+                }
+              }
+            }
+          ],
+          "header": "变异后图像数据集"
+        }
+      ]
+    }
+  ],
+  "id": "u:b45d373abd1d",
+  "style": {},
+  "regions": [
+    "body",
+    "header"
+  ]
+}
