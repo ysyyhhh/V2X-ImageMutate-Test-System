@@ -51,20 +51,6 @@ RUN DEBIAN_FRONTEND="noninteractive" apt -y install libglib2.0-dev libmagickwand
 COPY . .
 
 
-# RUN rm -rf migrations/ __pycache__/
-
-# RUN python manage.py makemigrations
-
-# RUN python manage.py migrate
-
-# RUN rm -rf /app/static/static/3
-
-# RUN rm db.sqlite3
-
-# RUN python manage.py makemigrations
-# # 
-# RUN python manage.py migrate
-
 ENV DJANGO_SETTINGS_MODULE=TestSystemServer.settings
 ENV DJANGO_ALLOWED_HOSTS=*
 # 启动django
